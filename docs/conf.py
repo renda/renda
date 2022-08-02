@@ -50,6 +50,8 @@ try:
         # This is a rudimentary parse_version to avoid external dependencies
         args = args[1:]
 
+    autodoc_mock_imports = ["numpy", "torch"]
+
     apidoc.main(args)
 except Exception as e:
     print("Running `sphinx-apidoc` failed!\n{}".format(e))
