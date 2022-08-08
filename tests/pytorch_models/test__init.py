@@ -137,7 +137,7 @@ def test__process_init_fn():
         assert _process_init_fn(fn) is fn
 
     # User-defined init function
-    # This needs to be checked elsewhere
+    # TODO: We let this pass here but this needs to be checked elsewhere
     def local_fn():
         pass
 
