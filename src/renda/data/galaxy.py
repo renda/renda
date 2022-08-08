@@ -44,7 +44,7 @@ class GalaxyDataset(TensorDataset):
         num_classes: int = 3,
         num_rotations: float = 1.0,
         density_peak: float = 0.3,
-        noise_sigma: float = 1.0,
+        noise_sigma: float = 0.3,
         seed: int = 0,
     ) -> None:
         """
