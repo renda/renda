@@ -136,10 +136,14 @@ def test__process_init_fn():
         assert _process_init_fn(fn_name) is fn
         assert _process_init_fn(fn) is fn
 
+    # User-defined init function
+    # This needs to be checked elsewhere
     def local_fn():
         pass
 
-    assert _process_init_fn(local_fn) is local_fn  # Assume user-defined init function
+    assert _process_init_fn(local_fn) is local_fn
+
+    del local_fn
 
     with pytest.raises(TypeError):
         _process_init_fn(0)

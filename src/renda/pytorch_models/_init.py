@@ -76,7 +76,9 @@ def _process_init_fn(fn: Union[None, str, Callable]) -> Callable:
         else:
             raise ValueError(f"Cannot find '{fn}' in 'torch.nn.init'.")
     elif isinstance(fn, Callable):
-        return fn  # Assume user defined init fn
+        # User defined init function
+        # TODO: We let this pass here but this needs to be checked elsewhere
+        return fn
     else:
         raise TypeError(f"Expected string, callable or None. Got {fn}.")
 
