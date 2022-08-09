@@ -76,6 +76,17 @@ extensions = [
     "sphinx.ext.napoleon",
 ]
 
+# See https://github.com/tox-dev/sphinx-autodoc-typehints for details about
+# this extension. We include it because autodoc/apidoc (sphinx version 5.1.1)
+# does not document the signature of subclasses from classes imported via
+# autodoc_mock_imports (see above).
+extensions.append("sphinx_autodoc_typehints")
+
+# This option comes with the sphinx_autodoc_typehints package. With "comma"
+# defaults are added after the type in the list of documented arguments, like
+# this: "<argument name> (int, default: 1) -- <description>"
+typehints_defaults = "comma"
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
 
@@ -161,7 +172,6 @@ html_theme = "sphinx_rtd_theme"
 # further.  For a list of options available for each theme, see the
 # documentation.
 html_theme_options = {
-
     'analytics_id': 'G-XXXXXXXXXX',  #  Provided by Google in your dashboard
     'analytics_anonymize_ip': False,
     'logo_only': False,
