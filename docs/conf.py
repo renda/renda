@@ -50,6 +50,7 @@ try:
         # This is a rudimentary parse_version to avoid external dependencies
         args = args[1:]
 
+    autodoc_member_order = "bysource"
     autodoc_mock_imports = ["numpy", "torch"]
 
     apidoc.main(args)
