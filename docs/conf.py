@@ -88,6 +88,9 @@ extensions.append("sphinx_autodoc_typehints")
 # this: "<argument name> (int, default: 1) -- <description>"
 typehints_defaults = "comma"
 
+# Render Attributes: section like Args: section
+napoleon_use_ivar = True
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
 
