@@ -96,6 +96,39 @@ class _Layer(torch.nn.Module):
 
 
 class EncoderLayer(_Layer):
+    r"""
+    Encoder layer for building (deep) autoencoder networks.
+
+    It consists a linear part that mimics the behavior of ``torch.nn.Linear``
+    followed by an ``activation`` function.
+
+    Args:
+        in_features: Number of input features.
+        out_features: Number of output features.
+        bias: If set to ``False``, the layer will not learn an additive bias.
+        activation: Can be the name of an activation class (e.g.,
+            ``'Sigmoid'``), an activation class (e.g., ``torch.nn.Sigmoid``) or
+            an instance of an activation class (e.g., ``torch.nn.Sigmoid()``).
+        activation_kwargs: Used to construct the specified ``activation``.
+            Ignored if the ``activation`` passed is already an instance of an
+            activation class.
+        seed: Used to ensure reproducibility when ``weight`` and/or ``bias``
+            are initialized randomly. If ``None``, the random initialization
+            depends on the state of PyTorch's global random number generator.
+        weight_init_fn: Can be the name of an init function (e.g.,
+            ``'normal_'``) or an init function (e.g., ``torch.nn.init.normal_``)
+            from ``torch.nn.init``, or ``None``. If ``None``, weights are
+            initialized as in ``torch.nn.Linear``.
+        weight_init_fn_kwargs: If ``weight_init_fn`` is not ``None``, weights
+            is initialized via ``weight_init_fn(weight, **weight_init_fn_kwargs)``.
+        bias_init_fn: Can be the name of an init function (e.g.,
+            ``'normal_'``) or an init function (e.g., ``torch.nn.init.normal_``)
+            from ``torch.nn.init``, or ``None``. If ``None``, biases are
+            initialized as in ``torch.nn.Linear``.
+        bias_init_fn_kwargs: If ``bias_init_fn`` is not ``None``, biases
+            is initialized via ``bias_init_fn(bias, **bias_init_fn_kwargs)``.
+    """
+
     def __init__(
         self,
         in_features: int,
@@ -188,12 +221,18 @@ class DecoderLayer(_Layer):
         )
 
     def forward(self, X: torch.Tensor, *args, **kwargs) -> torch.Tensor:
-
+        """
+        :meta private:
+        """
         X = F.linear(X, self.weight.t(), self.bias)
         X = self.activation(X)
         return X
 
 
 class Layer(EncoderLayer):
+    """
+    Alias for :class:`EncoderLayer` to be used when building (deep) neural
+    networks that are not autoencoders.
+    """
 
     pass
